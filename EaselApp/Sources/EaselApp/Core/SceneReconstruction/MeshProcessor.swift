@@ -12,7 +12,7 @@ struct ProcessedMesh {
     let faceCount: Int
 }
 
-struct BoundingBox {
+struct BoundingBox: Codable {
     let min: SIMD3<Float>
     let max: SIMD3<Float>
     

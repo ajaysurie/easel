@@ -1,6 +1,8 @@
 import ARKit
 import RealityKit
+import SceneKit
 import Combine
+import simd
 
 protocol ARSessionManagerDelegate: AnyObject {
     func sessionManager(_ manager: ARSessionManager, didUpdateFrame frame: ARFrame)
@@ -85,9 +87,15 @@ class ARSessionManager: NSObject, ObservableObject {
     }
     
     // MARK: - Raycasting
-    func raycast(from point: CGPoint, in view: ARSCNView) -> [ARRaycastResult] {
-        return view.raycastQuery(from: point, allowing: .estimatedPlane, alignment: .any)
-            .flatMap { session.raycast($0) }
+    func raycast(from point: CGPoint, viewportSize: CGSize, camera: ARCamera) -> [ARRaycastResult] {
+        let origin = SIMD3<Float>(camera.transform.columns.3.x, camera.transform.columns.3.y, camera.transform.columns.3.z)
+        
+        // Create raycast query for plane detection
+        let query = ARRaycastQuery(origin: origin,
+                                 direction: SIMD3<Float>(0, 0, -1), // Simplified direction
+                                 allowing: .estimatedPlane,
+                                 alignment: .any)
+        return session.raycast(query)
     }
     
     // MARK: - Anchor Management

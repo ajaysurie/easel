@@ -1,0 +1,24 @@
+name: EaselApp
+options:
+  bundleIdPrefix: com.easel
+  deploymentTarget:
+    iOS: "15.0"
+  developmentLanguage: en
+  
+settings:
+  SWIFT_VERSION: 5.9
+  IPHONEOS_DEPLOYMENT_TARGET: 15.0
+  ENABLE_PREVIEWS: YES
+  DEVELOPMENT_TEAM: ""
+
+targets:
+  EaselApp:
+    type: application
+    platform: iOS
+    sources:
+      - EaselApp/Sources/EaselApp/SimpleApp.swift
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.easel.EaselApp
+      INFOPLIST_FILE: EaselApp/Info.plist
+      ENABLE_PREVIEWS: YES
+      SWIFT_VERSION: 5.9

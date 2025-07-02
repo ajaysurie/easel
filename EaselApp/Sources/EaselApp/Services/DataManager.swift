@@ -1,40 +1,7 @@
 import Foundation
 import CoreData
 import CloudKit
-
-// MARK: - Core Data Models (will be created in .xcdatamodeld)
-class Project: NSManagedObject {
-    @NSManaged var id: UUID
-    @NSManaged var name: String
-    @NSManaged var createdAt: Date
-    @NSManaged var modifiedAt: Date
-    @NSManaged var roomMeshData: Data?
-    @NSManaged var sceneGraphData: Data?
-    @NSManaged var scaleFactor: Float
-    @NSManaged var thumbnailData: Data?
-    @NSManaged var versions: NSSet?
-    @NSManaged var measurements: NSSet?
-}
-
-class ProjectVersion: NSManagedObject {
-    @NSManaged var id: UUID
-    @NSManaged var versionNumber: Int32
-    @NSManaged var name: String?
-    @NSManaged var sceneGraphData: Data
-    @NSManaged var createdAt: Date
-    @NSManaged var project: Project
-}
-
-class Measurement: NSManagedObject {
-    @NSManaged var id: UUID
-    @NSManaged var startPoint: Data // SIMD3<Float> encoded
-    @NSManaged var endPoint: Data   // SIMD3<Float> encoded
-    @NSManaged var distance: Float
-    @NSManaged var unit: String
-    @NSManaged var label: String?
-    @NSManaged var createdAt: Date
-    @NSManaged var project: Project
-}
+import simd
 
 // MARK: - Data Manager
 class DataManager: ObservableObject {
@@ -67,8 +34,14 @@ class DataManager: ObservableObject {
         return persistentContainer.viewContext
     }
     
+    // MARK: - Shared Instance
+    static let shared = DataManager()
+    
     // MARK: - Initialization
-    init() {
+    private init() {
+        // Register value transformer for SIMD3<Float>
+        SIMD3TransformerFloat.register()
+        
         loadProjects()
         setupCloudKitNotifications()
     }
@@ -82,21 +55,14 @@ class DataManager: ObservableObject {
         return try await withCheckedThrowingContinuation { continuation in
             viewContext.perform {
                 do {
-                    let project = Project(context: self.viewContext)
-                    project.id = UUID()
-                    project.name = name
-                    project.createdAt = Date()
-                    project.modifiedAt = Date()
-                    project.scaleFactor = scaleFactor
+                    let project = Project(context: self.viewContext, name: name)
+                    // Note: id, createdDate, modifiedDate set in convenience init
                     
-                    // Encode mesh data if available
-                    if let mesh = mesh {
-                        project.roomMeshData = try self.encodeMesh(mesh)
-                    }
-                    
-                    // Encode scene graph if available
+                    // Note: Mesh and scene graph data will be stored in ProjectVersion
+                    // Create initial version if data provided
                     if let sceneGraph = sceneGraph {
-                        project.sceneGraphData = try self.encodeSceneGraph(sceneGraph)
+                        let version = project.createNewVersion()
+                        version.designData = try self.encodeSceneGraph(sceneGraph)
                     }
                     
                     try self.viewContext.save()
@@ -126,15 +92,12 @@ class DataManager: ObservableObject {
                         project.name = name
                     }
                     
-                    if let mesh = mesh {
-                        project.roomMeshData = try self.encodeMesh(mesh)
-                    }
-                    
                     if let sceneGraph = sceneGraph {
-                        project.sceneGraphData = try self.encodeSceneGraph(sceneGraph)
+                        let version = project.createNewVersion()
+                        version.designData = try self.encodeSceneGraph(sceneGraph)
                     }
                     
-                    project.modifiedAt = Date()
+                    project.updateModifiedDate()
                     
                     try self.viewContext.save()
                     
@@ -180,11 +143,9 @@ class DataManager: ObservableObject {
             viewContext.perform {
                 do {
                     let version = ProjectVersion(context: self.viewContext)
-                    version.id = UUID()
                     version.project = project
-                    version.name = name
-                    version.createdAt = Date()
-                    version.sceneGraphData = try self.encodeSceneGraph(sceneGraph)
+                    version.aiPrompt = name
+                    version.designData = try self.encodeSceneGraph(sceneGraph)
                     
                     // Calculate version number
                     let existingVersions = project.versions?.allObjects as? [ProjectVersion] ?? []
@@ -217,15 +178,9 @@ class DataManager: ObservableObject {
         return try await withCheckedThrowingContinuation { continuation in
             viewContext.perform {
                 do {
-                    let measurement = Measurement(context: self.viewContext)
-                    measurement.id = UUID()
+                    let measurement = Measurement(context: self.viewContext, startPoint: startPoint, endPoint: endPoint)
                     measurement.project = project
-                    measurement.startPoint = try self.encodePoint(startPoint)
-                    measurement.endPoint = try self.encodePoint(endPoint)
-                    measurement.distance = distance(startPoint, endPoint)
-                    measurement.unit = "meters"
-                    measurement.label = label
-                    measurement.createdAt = Date()
+                    measurement.type = "distance"
                     
                     try self.viewContext.save()
                     continuation.resume(returning: measurement)
@@ -240,7 +195,7 @@ class DataManager: ObservableObject {
     // MARK: - Data Loading
     private func loadProjects() {
         let request: NSFetchRequest<Project> = Project.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Project.modifiedAt, ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Project.modifiedDate, ascending: false)]
         
         do {
             projects = try viewContext.fetch(request)
@@ -267,6 +222,11 @@ class DataManager: ObservableObject {
     private func encodeSceneGraph(_ sceneGraph: SceneGraph) throws -> Data {
         let encoder = JSONEncoder()
         return try encoder.encode(sceneGraph)
+    }
+    
+    private func encodeDesignObjects(_ objects: [DesignObject]) throws -> Data {
+        let encoder = JSONEncoder()
+        return try encoder.encode(objects)
     }
     
     private func encodePoint(_ point: SIMD3<Float>) throws -> Data {
@@ -351,20 +311,4 @@ class DataManager: ObservableObject {
 }
 
 // MARK: - Extensions
-extension Project {
-    static func fetchRequest() -> NSFetchRequest<Project> {
-        return NSFetchRequest<Project>(entityName: "Project")
-    }
-}
-
-extension ProjectVersion {
-    static func fetchRequest() -> NSFetchRequest<ProjectVersion> {
-        return NSFetchRequest<ProjectVersion>(entityName: "ProjectVersion")
-    }
-}
-
-extension Measurement {
-    static func fetchRequest() -> NSFetchRequest<Measurement> {
-        return NSFetchRequest<Measurement>(entityName: "Measurement")
-    }
-}
+// fetchRequest methods are defined in Core Data generated property files

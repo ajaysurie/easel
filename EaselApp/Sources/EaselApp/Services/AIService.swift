@@ -1,6 +1,8 @@
 import Foundation
 import Alamofire
 import FirebaseAuth
+import ARKit
+import simd
 
 // MARK: - API Models
 struct DesignRequest: Codable {
@@ -40,14 +42,14 @@ struct PlaneData: Codable {
 }
 
 struct DesignResponse: Codable {
-    let sceneGraph: SceneGraph
+    let objects: [DesignObject]
     let confidenceScores: [String: Float]
     let inferenceTimeMs: Int
     let success: Bool
     let error: String?
     
     enum CodingKeys: String, CodingKey {
-        case sceneGraph = "scene_graph"
+        case objects
         case confidenceScores = "confidence_scores"
         case inferenceTimeMs = "inference_time_ms"
         case success
@@ -55,47 +57,7 @@ struct DesignResponse: Codable {
     }
 }
 
-struct SceneGraph: Codable {
-    let objects: [Object3D]
-    let surfaces: [Surface]
-    let lighting: LightingConfig
-}
-
-struct Object3D: Codable {
-    let id: String
-    let type: String
-    let position: [Float] // x, y, z
-    let rotation: [Float] // x, y, z, w quaternion
-    let scale: [Float] // x, y, z
-    let modelURL: String?
-    let materials: [String]
-    let metadata: [String: String]
-}
-
-struct Surface: Codable {
-    let id: String
-    let type: String // "wall", "floor", "ceiling"
-    let material: String
-    let color: [Float] // r, g, b, a
-    let vertices: [Float]
-}
-
-struct LightingConfig: Codable {
-    let ambientIntensity: Float
-    let lightSources: [LightSource]
-    
-    enum CodingKeys: String, CodingKey {
-        case ambientIntensity = "ambient_intensity"
-        case lightSources = "light_sources"
-    }
-}
-
-struct LightSource: Codable {
-    let type: String // "directional", "point", "spot"
-    let position: [Float]
-    let intensity: Float
-    let color: [Float]
-}
+// Using SceneGraph and related types from DataTypes.swift
 
 // MARK: - Error Types
 enum AIServiceError: Error, LocalizedError {

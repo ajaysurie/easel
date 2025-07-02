@@ -3,182 +3,52 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1000001 /* EaselApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000 /* EaselApp.swift */; };
-		A1000003 /* ARSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002 /* ARSessionManager.swift */; };
-		A1000005 /* MeshProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000004 /* MeshProcessor.swift */; };
-		A1000007 /* ScaleCalibrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000006 /* ScaleCalibrator.swift */; };
-		A1000009 /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000008 /* AIService.swift */; };
-		A100000B /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000A /* AuthenticationService.swift */; };
-		A100000D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000C /* DataManager.swift */; };
-		A100000F /* EaselDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A100000E /* EaselDataModel.xcdatamodeld */; };
+		AAEDD960B380A7953FCD5A6C /* SimpleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3978C2E31241E2DFE8F2F49E /* SimpleApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A0FFFFFF /* EaselApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EaselApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1000000 /* EaselApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EaselApp.swift; sourceTree = "<group>"; };
-		A1000002 /* ARSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionManager.swift; sourceTree = "<group>"; };
-		A1000004 /* MeshProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshProcessor.swift; sourceTree = "<group>"; };
-		A1000006 /* ScaleCalibrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleCalibrator.swift; sourceTree = "<group>"; };
-		A1000008 /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
-		A100000A /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
-		A100000C /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		A100000E /* EaselDataModel.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodeld; path = EaselDataModel.xcdatamodeld; sourceTree = "<group>"; };
-		A1000010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3978C2E31241E2DFE8F2F49E /* SimpleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleApp.swift; sourceTree = "<group>"; };
+		484EED63A8823CE8A0A939FE /* EaselApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = EaselApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFrameworksBuildPhase section */
-		A0FFFFFE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
 /* Begin PBXGroup section */
-		A0FFFFF8 = {
+		50ACD1689D0603C788CB854D = {
 			isa = PBXGroup;
 			children = (
-				A0FFFFF9 /* EaselApp */,
-				A0FFFFFF /* Products */,
+				633859A974EA436FE9C162AF /* EaselApp */,
+				D1690BACC6C374352DF25051 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		A0FFFFF9 /* EaselApp */ = {
+		633859A974EA436FE9C162AF /* EaselApp */ = {
 			isa = PBXGroup;
 			children = (
-				A1000000 /* EaselApp.swift */,
-				A1000011 /* Core */,
-				A1000012 /* Features */,
-				A1000013 /* Services */,
-				A1000014 /* Resources */,
-				A100000E /* EaselDataModel.xcdatamodeld */,
-				A1000010 /* Info.plist */,
+				3978C2E31241E2DFE8F2F49E /* SimpleApp.swift */,
 			);
-			path = EaselApp;
+			name = EaselApp;
+			path = EaselApp/Sources/EaselApp;
 			sourceTree = "<group>";
 		};
-		A0FFFFFF /* Products */ = {
+		D1690BACC6C374352DF25051 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A0FFFFFF /* EaselApp.app */,
+				484EED63A8823CE8A0A939FE /* EaselApp.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A1000011 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				A1000002 /* ARSessionManager.swift */,
-				A1000015 /* SceneReconstruction */,
-				A1000016 /* Calibration */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		A1000012 /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				A1000017 /* Scanning */,
-				A1000018 /* Design */,
-				A1000019 /* Editing */,
-				A100001A /* Export */,
-			);
-			path = Features;
-			sourceTree = "<group>";
-		};
-		A1000013 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				A1000008 /* AIService.swift */,
-				A100000A /* AuthenticationService.swift */,
-				A100000C /* DataManager.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		A1000014 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				A100001B /* Models */,
-				A100001C /* Shaders */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		A1000015 /* SceneReconstruction */ = {
-			isa = PBXGroup;
-			children = (
-				A1000004 /* MeshProcessor.swift */,
-			);
-			path = SceneReconstruction;
-			sourceTree = "<group>";
-		};
-		A1000016 /* Calibration */ = {
-			isa = PBXGroup;
-			children = (
-				A1000006 /* ScaleCalibrator.swift */,
-			);
-			path = Calibration;
-			sourceTree = "<group>";
-		};
-		A1000017 /* Scanning */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Scanning;
-			sourceTree = "<group>";
-		};
-		A1000018 /* Design */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Design;
-			sourceTree = "<group>";
-		};
-		A1000019 /* Editing */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Editing;
-			sourceTree = "<group>";
-		};
-		A100001A /* Export */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Export;
-			sourceTree = "<group>";
-		};
-		A100001B /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		A100001C /* Shaders */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A0FFFFFE /* EaselApp */ = {
+		D4572D09D13E455504568F91 /* EaselApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A100001D /* Build configuration list for PBXNativeTarget "EaselApp" */;
+			buildConfigurationList = A412A070567F13CFFB30E0D5 /* Build configuration list for PBXNativeTarget "EaselApp" */;
 			buildPhases = (
-				A0FFFFFC /* Sources */,
-				A0FFFFFE /* Frameworks */,
-				A0FFFFFF /* Resources */,
+				27D7753C334218BD8D68E49C /* Sources */,
 			);
 			buildRules = (
 			);
@@ -188,81 +58,80 @@
 			packageProductDependencies = (
 			);
 			productName = EaselApp;
-			productReference = A0FFFFFF /* EaselApp.app */;
+			productReference = 484EED63A8823CE8A0A939FE /* EaselApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A0FFFFF7 /* Project object */ = {
+		B1BA4CEA3D2D28B74620AA6F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					A0FFFFFE = {
-						CreatedOnToolsVersion = 15.0;
+					D4572D09D13E455504568F91 = {
+						DevelopmentTeam = "";
 					};
 				};
 			};
-			buildConfigurationList = A0FFFFFA /* Build configuration list for PBXProject "EaselApp" */;
+			buildConfigurationList = 2440AC6DBA748BF898F00C04 /* Build configuration list for PBXProject "EaselApp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
-			mainGroup = A0FFFFF8;
-			packageReferences = (
-			);
-			productRefGroup = A0FFFFFF /* Products */;
+			mainGroup = 50ACD1689D0603C788CB854D;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 54;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A0FFFFFE /* EaselApp */,
+				D4572D09D13E455504568F91 /* EaselApp */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		A0FFFFFF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		A0FFFFFC /* Sources */ = {
+		27D7753C334218BD8D68E49C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1000001 /* EaselApp.swift in Sources */,
-				A1000003 /* ARSessionManager.swift in Sources */,
-				A1000005 /* MeshProcessor.swift in Sources */,
-				A1000007 /* ScaleCalibrator.swift in Sources */,
-				A1000009 /* AIService.swift in Sources */,
-				A100000B /* AuthenticationService.swift in Sources */,
-				A100000D /* DataManager.swift in Sources */,
-				A100000F /* EaselDataModel.xcdatamodeld in Sources */,
+				AAEDD960B380A7953FCD5A6C /* SimpleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		A100001B /* Debug */ = {
+		23D3027DA5C14217854A098A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = EaselApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.easel.EaselApp;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2E8256EAB1D290CC47FFF046 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -290,16 +159,17 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
+					"DEBUG=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -308,24 +178,25 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
 			};
 			name = Debug;
 		};
-		A100001C /* Release */ = {
+		34D2DCB6B022A3214ED89469 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -353,10 +224,11 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -365,117 +237,56 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				VALIDATE_PRODUCT = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
 			};
 			name = Release;
 		};
-		A100001E /* Debug */ = {
+		4D31D10970E3BC80FD1E9C31 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EaselApp/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Easel uses the camera for AR room scanning and design visualization.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.opareto.easel;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.easel.EaselApp;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		A100001F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = EaselApp/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Easel uses the camera for AR room scanning and design visualization.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.opareto.easel;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A0FFFFFA /* Build configuration list for PBXProject "EaselApp" */ = {
+		2440AC6DBA748BF898F00C04 /* Build configuration list for PBXProject "EaselApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A100001B /* Debug */,
-				A100001C /* Release */,
+				2E8256EAB1D290CC47FFF046 /* Debug */,
+				34D2DCB6B022A3214ED89469 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		A100001D /* Build configuration list for PBXNativeTarget "EaselApp" */ = {
+		A412A070567F13CFFB30E0D5 /* Build configuration list for PBXNativeTarget "EaselApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A100001E /* Debug */,
-				A100001F /* Release */,
+				4D31D10970E3BC80FD1E9C31 /* Debug */,
+				23D3027DA5C14217854A098A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		A100000E /* EaselDataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-			);
-			currentVersion = A100000E /* EaselDataModel.xcdatamodel */;
-			path = EaselDataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
-	}
-	rootObject = A0FFFFF7 /* Project object */;
+	};
+	rootObject = B1BA4CEA3D2D28B74620AA6F /* Project object */;
 }

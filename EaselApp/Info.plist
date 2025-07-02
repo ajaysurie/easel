@@ -22,6 +22,10 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Easel uses the camera for AR room scanning and design visualization.</string>
+	<key>CFBundleDisplayName</key>
+	<string>Easel</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Easel may use the microphone for voice commands during scanning.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -35,8 +39,6 @@
 					<string>Default Configuration</string>
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-					<key>UISceneStoryboardFile</key>
-					<string>Main</string>
 				</dict>
 			</array>
 		</dict>
@@ -53,6 +55,8 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

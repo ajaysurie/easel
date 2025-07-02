@@ -9,31 +9,13 @@ struct AuthToken {
     let refreshToken: String?
 }
 
-enum AuthenticationError: Error, LocalizedError {
-    case signInCancelled
-    case signInFailed(Error)
-    case tokenRetrievalFailed
-    case keychainError(Error)
-    case userNotAuthenticated
-    
-    var errorDescription: String? {
-        switch self {
-        case .signInCancelled:
-            return "Sign in was cancelled"
-        case .signInFailed(let error):
-            return "Sign in failed: \(error.localizedDescription)"
-        case .tokenRetrievalFailed:
-            return "Failed to retrieve authentication token"
-        case .keychainError(let error):
-            return "Keychain error: \(error.localizedDescription)"
-        case .userNotAuthenticated:
-            return "User is not authenticated"
-        }
-    }
-}
+// Using AuthenticationError from DataTypes.swift
 
 @MainActor
 class AuthenticationService: NSObject, ObservableObject {
+    
+    // MARK: - Shared Instance
+    static let shared = AuthenticationService()
     
     // MARK: - Published Properties
     @Published var isAuthenticated = false
@@ -46,7 +28,7 @@ class AuthenticationService: NSObject, ObservableObject {
     private var authStateHandle: AuthStateDidChangeListenerHandle?
     
     // MARK: - Initialization
-    override init() {
+    private override init() {
         super.init()
         setupAuthStateListener()
         checkAuthStatus()
@@ -70,7 +52,7 @@ class AuthenticationService: NSObject, ObservableObject {
             // Create Firebase credential
             let firebaseCredential = OAuthProvider.credential(
                 withProviderID: "apple.com",
-                idToken: appleIDCredential.identityToken!,
+                idToken: String(data: appleIDCredential.identityToken!, encoding: .utf8)!,
                 rawNonce: appleIDCredential.nonce
             )
             
@@ -83,7 +65,7 @@ class AuthenticationService: NSObject, ObservableObject {
             print("Successfully signed in with Apple: \(result.user.uid)")
             
         } catch {
-            throw AuthenticationError.signInFailed(error)
+            throw AuthenticationError.firebaseError(error)
         }
     }
     
@@ -93,13 +75,13 @@ class AuthenticationService: NSObject, ObservableObject {
             try keychain.removeAll()
             print("Successfully signed out")
         } catch {
-            throw AuthenticationError.signInFailed(error)
+            throw AuthenticationError.firebaseError(error)
         }
     }
     
     func getAuthToken() async throws -> AuthToken {
         guard let currentUser = auth.currentUser else {
-            throw AuthenticationError.userNotAuthenticated
+            throw AuthenticationError.notSignedIn
         }
         
         do {
@@ -112,17 +94,17 @@ class AuthenticationService: NSObject, ObservableObject {
                 refreshToken: currentUser.refreshToken
             )
         } catch {
-            throw AuthenticationError.tokenRetrievalFailed
+            throw AuthenticationError.invalidCredentials
         }
     }
     
     func refreshAuthToken() async throws -> AuthToken {
         guard let currentUser = auth.currentUser else {
-            throw AuthenticationError.userNotAuthenticated
+            throw AuthenticationError.notSignedIn
         }
         
         do {
-            let idToken = try await currentUser.getIDToken(forcingRefresh: true)
+            let idToken = try await currentUser.getIDToken()
             let expirationDate = Date().addingTimeInterval(3600)
             
             let token = AuthToken(
@@ -136,7 +118,7 @@ class AuthenticationService: NSObject, ObservableObject {
             
             return token
         } catch {
-            throw AuthenticationError.tokenRetrievalFailed
+            throw AuthenticationError.invalidCredentials
         }
     }
     
@@ -190,7 +172,7 @@ class AuthenticationService: NSObject, ObservableObject {
             try keychain.set(user.uid, key: "user_id")
             
         } catch {
-            throw AuthenticationError.keychainError(error)
+            throw AuthenticationError.networkError(error)
         }
     }
     
@@ -238,7 +220,7 @@ private class AppleSignInDelegate: NSObject, ASAuthorizationControllerDelegate, 
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             completion(.success(appleIDCredential))
         } else {
-            completion(.failure(AuthenticationError.signInFailed(NSError(domain: "Invalid credential type", code: -1))))
+            completion(.failure(AuthenticationError.firebaseError(NSError(domain: "Invalid credential type", code: -1))))
         }
     }
     
@@ -248,10 +230,10 @@ private class AppleSignInDelegate: NSObject, ASAuthorizationControllerDelegate, 
             case .canceled:
                 completion(.failure(AuthenticationError.signInCancelled))
             default:
-                completion(.failure(AuthenticationError.signInFailed(authError)))
+                completion(.failure(AuthenticationError.firebaseError(authError)))
             }
         } else {
-            completion(.failure(AuthenticationError.signInFailed(error)))
+            completion(.failure(AuthenticationError.firebaseError(error)))
         }
     }
     

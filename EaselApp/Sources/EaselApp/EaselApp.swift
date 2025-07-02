@@ -2,9 +2,12 @@ import SwiftUI
 import ARKit
 import RealityKit
 import FirebaseCore
+import AVFoundation
 
 @main
 struct EaselApp: App {
+    @StateObject private var dataManager = DataManager.shared
+    @StateObject private var authService = AuthenticationService.shared
     
     init() {
         // Configure Firebase
@@ -21,9 +24,11 @@ struct EaselApp: App {
         }
     }
     
-    var body: some Scene {
+    var body: some SwiftUI.Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(dataManager)
+                .environmentObject(authService)
                 .onAppear {
                     requestCameraPermission()
                 }
@@ -39,57 +44,3 @@ struct EaselApp: App {
     }
 }
 
-struct ContentView: View {
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Easel")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding()
-                
-                Text("AI-Powered AR Home Design")
-                    .font(.headline)
-                    .foregroundColor(.secondary)
-                    .padding(.bottom, 40)
-                
-                VStack(spacing: 20) {
-                    NavigationLink("Start New Project") {
-                        ARScanningView()
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                    
-                    NavigationLink("My Projects") {
-                        ProjectListView()
-                    }
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
-                }
-                
-                Spacer()
-            }
-            .navigationTitle("Easel")
-            .navigationBarHidden(true)
-        }
-    }
-}
-
-// Placeholder views for navigation
-struct ARScanningView: View {
-    var body: some View {
-        Text("AR Scanning View")
-            .navigationTitle("Scan Room")
-    }
-}
-
-struct ProjectListView: View {
-    var body: some View {
-        Text("Project List View")
-            .navigationTitle("My Projects")
-    }
-}
-
-#Preview {
-    ContentView()
-}
